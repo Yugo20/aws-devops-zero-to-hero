@@ -26,7 +26,7 @@ def lambda_handler(event, context):
     for snapshot in snapshots:
         volume_id = snapshot['VolumeId']
         if volume_id not in active_volumes:
-            print(f"Deleting stale snapshot with ID: {snapshot['SnapshotId']}")
+            print(f"Deleting stale snapshot with ID: {snapshot['SnapshotId']} as its associated volume was not found.")
             ebs_client.delete_snapshot(SnapshotId=snapshot['SnapshotId'])
 
     return {
